@@ -1,0 +1,17 @@
+{
+  "name": "redux-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc -b --watch & nodemon dist/index.js",
+    "build": "tsc -b"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.1",
+  "dependencies": {
+    "typescript": "^5.8.3"
+  }
+}
