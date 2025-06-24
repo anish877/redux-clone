@@ -24,3 +24,15 @@ function createStore(reducer:any){
         subscribe
     }
 }
+
+function combineReducers(reducers: { [key: string]: (state: any, action: any) => any }) {
+    return function(state: any = {}, action: any) {
+        let newState: { [key: string]: any } = {};
+        for (let key in reducers) {
+            const reducer = reducers[key];
+            const prevStateForKey = state[key];
+            newState[key] = reducer(prevStateForKey, action);
+        }
+        return newState;
+    };
+}
