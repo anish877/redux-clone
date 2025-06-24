@@ -36,3 +36,15 @@ function combineReducers(reducers: { [key: string]: (state: any, action: any) =>
         return newState;
     };
 }
+
+function bindActionCreators(actionCreators: { [key: string]: (...args: any[]) => any }, dispatch: any) {
+    let bound: { [key: string]: (...args: any[]) => any } = {};
+    for(let key in actionCreators){
+        const actionCreator = actionCreators[key];
+        bound[key] = function(...args:any[]){
+            return dispatch(actionCreator(...args));
+        }
+    }
+    return bound;
+}
+    
