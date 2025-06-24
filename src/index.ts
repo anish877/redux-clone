@@ -1,4 +1,4 @@
-function createStore(reducer:any){
+export function createStore(reducer:any){
     let state:any;
     let listeners:any[] = [];
 
@@ -25,7 +25,7 @@ function createStore(reducer:any){
     }
 }
 
-function combineReducers(reducers: { [key: string]: (state: any, action: any) => any }) {
+export function combineReducers(reducers: { [key: string]: (state: any, action: any) => any }) {
     return function combination(state: { [key: string]: any } = {}, action: any) {
       const nextState: { [key: string]: any } = {};
       for (let key in reducers) {
@@ -42,7 +42,7 @@ function combineReducers(reducers: { [key: string]: (state: any, action: any) =>
 }
   
 
-function bindActionCreators(actionCreators: { [key: string]: (...args: any[]) => any }, dispatch: any) {
+export function bindActionCreators(actionCreators: { [key: string]: (...args: any[]) => any }, dispatch: any) {
     let bound: { [key: string]: (...args: any[]) => any } = {};
     for(let key in actionCreators){
         const actionCreator = actionCreators[key];
