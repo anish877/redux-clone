@@ -26,16 +26,21 @@ function createStore(reducer:any){
 }
 
 function combineReducers(reducers: { [key: string]: (state: any, action: any) => any }) {
-    return function(state: any = {}, action: any) {
-        let newState: { [key: string]: any } = {};
-        for (let key in reducers) {
-            const reducer = reducers[key];
-            const prevStateForKey = state[key];
-            newState[key] = reducer(prevStateForKey, action);
+    return function combination(state: { [key: string]: any } = {}, action: any) {
+      const nextState: { [key: string]: any } = {};
+      for (let key in reducers) {
+        const reducer = reducers[key];
+        const prevSlice = state[key];
+        const nextSlice = reducer(prevSlice, action);
+        if (typeof nextSlice === 'undefined') {
+          throw new Error("Reducer must not return undefined");
         }
-        return newState;
+        nextState[key] = nextSlice;
+      }
+      return nextState;
     };
 }
+  
 
 function bindActionCreators(actionCreators: { [key: string]: (...args: any[]) => any }, dispatch: any) {
     let bound: { [key: string]: (...args: any[]) => any } = {};
